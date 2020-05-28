@@ -7,6 +7,7 @@ import ru.testproject.catalog.model.Product;
 import ru.testproject.catalog.service.ProductService;
 import ru.testproject.catalog.to.ProductTO;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,12 +25,12 @@ public class ProductController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Product> add(@RequestBody ProductTO productTO) {
+    public ResponseEntity<Product> add(@Valid ProductTO productTO) {
         return ResponseEntity.ok(productService.add(productTO.name, productTO.category));
     }
 
     @PutMapping("/move")
-    public ResponseEntity<Void> move(@RequestBody ProductTO productTO) {
+    public ResponseEntity<Void> move(@Valid ProductTO productTO) {
         productService.move(productTO.name, productTO.category);
         return ResponseEntity.ok().build();
     }

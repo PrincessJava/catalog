@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import ru.testproject.catalog.exception.ConstraintViolationException;
 import ru.testproject.catalog.exception.NoDataFoundException;
 import ru.testproject.catalog.model.Category;
 import ru.testproject.catalog.repository.CategoryRepository;
@@ -51,6 +52,10 @@ public class CategoryService {
     public void delete(String categoryName) {
         Category category = repository.getByName(categoryName)
                 .orElseThrow(() -> new NoDataFoundException(categoryName));
+
+        if (!category.getProducts().isEmpty() || !category.getChildren().isEmpty()) {
+            throw new ConstraintViolationException(categoryName);
+        }
 
         Category parent = category.getParent();
         parent.getChildren().remove(category);

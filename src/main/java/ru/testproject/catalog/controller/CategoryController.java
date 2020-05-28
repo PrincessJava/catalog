@@ -7,6 +7,8 @@ import ru.testproject.catalog.model.Category;
 import ru.testproject.catalog.service.CategoryService;
 import ru.testproject.catalog.to.CategoryTO;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/categories")
 public class CategoryController {
@@ -27,7 +29,7 @@ public class CategoryController {
     }
 
     @PutMapping("/move")
-    public ResponseEntity<Void> move(@RequestBody CategoryTO categoryTO) {
+    public ResponseEntity<Void> move(@Valid CategoryTO categoryTO) {
         categoryService.move(categoryTO.name, categoryTO.newCatName);
         return ResponseEntity.ok().build();
     }
