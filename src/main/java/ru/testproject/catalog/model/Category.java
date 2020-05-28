@@ -1,10 +1,7 @@
 package ru.testproject.catalog.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -16,7 +13,7 @@ public class Category extends BasicEntity {
     @JoinColumn(name = "parent_id")
     private Category parent;
 
-    @OneToMany(mappedBy = "parent", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToMany(mappedBy = "parent")
     private List<Category> children;
 
     @OneToMany(mappedBy = "category")

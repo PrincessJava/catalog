@@ -23,7 +23,7 @@ body:
 	"name" : "{productName}",
 	"category" : "{categoryName}"
 }
-5. http://localhost:8080/products/get-by-category/{categoryName} - возвращает список продуктов в разделе
+5. http://localhost:8080/products/{categoryName} - возвращает список продуктов в разделе
 6. http://localhost:8080/products/move - перемещает продукт из одного раздела в другой 
 body:
 {
