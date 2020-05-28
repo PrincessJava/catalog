@@ -1,7 +1,6 @@
 package ru.testproject.catalog.controller;
 
 import com.sun.istack.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.testproject.catalog.model.Product;
@@ -15,7 +14,6 @@ import java.util.List;
 public class ProductController {
     private ProductService productService;
 
-    @Autowired
     public ProductController(ProductService productService) {
         this.productService = productService;
     }

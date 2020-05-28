@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "product")
 public class Product extends BasicEntity {
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @NotNull

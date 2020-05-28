@@ -1,14 +1,10 @@
 package ru.testproject.catalog.controller;
 
 import com.sun.istack.Nullable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import ru.testproject.catalog.model.Category;
-import ru.testproject.catalog.model.Product;
 import ru.testproject.catalog.service.CategoryService;
-import ru.testproject.catalog.service.ProductService;
 import ru.testproject.catalog.to.CategoryTO;
 
 @RestController
@@ -16,7 +12,6 @@ import ru.testproject.catalog.to.CategoryTO;
 public class CategoryController {
     private CategoryService categoryService;
 
-    @Autowired
     public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }

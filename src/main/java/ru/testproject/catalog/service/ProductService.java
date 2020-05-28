@@ -1,7 +1,7 @@
 package ru.testproject.catalog.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import ru.testproject.catalog.exception.NoDataFoundException;
 import ru.testproject.catalog.model.Category;
@@ -16,40 +16,40 @@ public class ProductService {
     private ProductRepository repository;
     private CategoryService categoryService;
 
-    @Autowired
     public ProductService(ProductRepository repository, CategoryService categoryService) {
         this.repository = repository;
         this.categoryService = categoryService;
     }
 
+    @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     public List<Product> getByCategory(String categoryName) {
         Category category = categoryService.getCategoryByName(categoryName);
-        NoDataFoundException.checkNotNull(category, categoryName);
         return category.getProducts();
     }
 
     public Product add(String productName, String categoryName) {
         Category category = categoryService.getCategoryByName(categoryName);
-        NoDataFoundException.checkNotNull(category, categoryName);
         Product product = new Product(productName);
         product.setCategory(category);
-        categoryService.addProduct(category, product);
+        category.getProducts().add(product);
 
         return repository.save(product);
     }
 
     public void move(String productName, String newCategoryName) {
         Category newCategory = categoryService.getCategoryByName(newCategoryName);
-        Product product = repository.getByName(productName);
+        Product product = repository.getByName(productName)
+                .orElseThrow(() -> new NoDataFoundException(productName));
         Category oldCategory = categoryService.getCategoryByName(product.getCategory().getName());
 
         product.setCategory(newCategory);
-        categoryService.addProduct(newCategory, product);
-        categoryService.removeProduct(oldCategory, product);
+        newCategory.getProducts().add(product);
+        oldCategory.getProducts().remove(product);
     }
 
     public void delete(String productName) {
-        Product product = repository.getByName(productName);
+        Product product = repository.getByName(productName)
+                .orElseThrow(() -> new NoDataFoundException(productName));
         product.getCategory().getProducts().remove(product);
         repository.delete(product);
     }
