@@ -1,6 +1,9 @@
 package ru.testproject.catalog.controller;
 
 import com.sun.istack.NotNull;
+import io.swagger.annotations.*;
+import io.swagger.models.HttpMethod;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.testproject.catalog.model.Product;
@@ -11,15 +14,20 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
+@Api(tags = "Товары")
 @RequestMapping("/products")
 public class ProductController {
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/{categoryName}")
+    @ApiOperation(httpMethod = "GET", value = "Список продуктов заданной категории", tags = "Список продуктов заданной категории")
+    @ApiResponses(value = {
+            @ApiResponse(code = 404, message = "No data found:")
+    })
+    @GetMapping(value = "/{categoryName}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<Product>> getByCategory(@PathVariable @NotNull String categoryName) {
         return ResponseEntity.ok(productService.getByCategory(categoryName));
     }

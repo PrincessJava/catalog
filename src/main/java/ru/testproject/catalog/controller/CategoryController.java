@@ -1,6 +1,7 @@
 package ru.testproject.catalog.controller;
 
 import com.sun.istack.Nullable;
+import io.swagger.annotations.Api;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.testproject.catalog.model.Category;
@@ -10,7 +11,8 @@ import ru.testproject.catalog.to.CategoryTO;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/categories")
+@Api(tags = "Категории")
+@RequestMapping(path = "/categories")
 public class CategoryController {
     private CategoryService categoryService;
 
