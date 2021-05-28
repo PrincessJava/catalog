@@ -18,9 +18,12 @@ spring:
 
 ---
 
-#spring:
-#  profiles: dev
-#  datasource:
-#    url:
-#    username:
-#    password:
+spring:
+  profiles: dev
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/catalog
+    username: postgres
+    password: postgres
+

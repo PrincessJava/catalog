@@ -1,6 +1,5 @@
 package ru.testproject.catalog.service
 
-import org.apache.commons.lang3.StringUtils
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
