@@ -1,16 +1,19 @@
-package ru.testproject.catalog.service
+package ru.petproject.catalog.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
-import ru.testproject.catalog.repository.ProductRepository
-import ru.testproject.catalog.service.CategoryService
-import ru.testproject.catalog.model.Product
-import ru.testproject.catalog.exception.NoDataFoundException
+import ru.petproject.catalog.repository.ProductRepository
+import ru.petproject.catalog.model.Product
+import ru.petproject.catalog.exception.NoDataFoundException
 
 @Transactional
 @Service
-class ProductService(private val repository: ProductRepository, private val categoryService: CategoryService) {
+class ProductService(
+    private val repository: ProductRepository,
+    private val categoryService: CategoryService
+) {
+
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     fun getByCategory(categoryName: String): List<Product> {
         val category = categoryService.getCategoryByName(categoryName)
@@ -19,8 +22,7 @@ class ProductService(private val repository: ProductRepository, private val cate
 
     fun add(productName: String, categoryName: String): Product {
         val category = categoryService.getCategoryByName(categoryName)
-        val product = Product(productName)
-        product.category = category
+        val product = Product(productName).apply { this.category = category }
         category.products.add(product)
         return repository.save(product)
     }

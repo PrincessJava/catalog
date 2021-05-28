@@ -1,4 +1,4 @@
-package ru.testproject.catalog.to
+package ru.petproject.catalog.to
 
 import java.io.Serializable
 import javax.validation.constraints.NotBlank

@@ -1,14 +1,19 @@
 spring:
   profiles:
-    active: test
+    active: dev
   jpa:
     hibernate:
       ddl-auto: validate
     open-in-view: false
-
+  liquibase:
+    enabled: false
 ---
+
 spring:
   profiles: test
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
   h2:
     console:
       enabled: true

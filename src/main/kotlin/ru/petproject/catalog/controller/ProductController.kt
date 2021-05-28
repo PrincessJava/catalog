@@ -1,16 +1,16 @@
-package ru.testproject.catalog.controller
+package ru.petproject.catalog.controller
 
 import com.sun.istack.NotNull
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
-import ru.testproject.catalog.service.ProductService
+import ru.petproject.catalog.service.ProductService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.http.ResponseEntity
-import ru.testproject.catalog.model.Product
+import ru.petproject.catalog.model.Product
 import org.springframework.web.bind.annotation.PostMapping
 import javax.validation.Valid
-import ru.testproject.catalog.to.ProductTO
+import ru.petproject.catalog.to.ProductTO
 import org.springframework.web.bind.annotation.PutMapping
 import java.lang.Void
 import org.springframework.web.bind.annotation.DeleteMapping

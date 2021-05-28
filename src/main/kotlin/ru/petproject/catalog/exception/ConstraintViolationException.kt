@@ -1,4 +1,4 @@
-package ru.testproject.catalog.exception
+package ru.petproject.catalog.exception
 
 import java.lang.RuntimeException
 

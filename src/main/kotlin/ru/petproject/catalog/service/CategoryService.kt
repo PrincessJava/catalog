@@ -1,12 +1,12 @@
-package ru.testproject.catalog.service
+package ru.petproject.catalog.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Propagation
 import org.springframework.transaction.annotation.Transactional
-import ru.testproject.catalog.exception.ConstraintViolationException
-import ru.testproject.catalog.repository.CategoryRepository
-import ru.testproject.catalog.exception.NoDataFoundException
-import ru.testproject.catalog.model.Category
+import ru.petproject.catalog.exception.ConstraintViolationException
+import ru.petproject.catalog.repository.CategoryRepository
+import ru.petproject.catalog.exception.NoDataFoundException
+import ru.petproject.catalog.model.Category
 
 @Service
 @Transactional

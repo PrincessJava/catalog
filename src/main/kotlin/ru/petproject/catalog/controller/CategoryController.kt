@@ -1,9 +1,9 @@
-package ru.testproject.catalog.controller
+package ru.petproject.catalog.controller
 
 import com.sun.istack.Nullable
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
-import ru.testproject.catalog.service.CategoryService
+import ru.petproject.catalog.service.CategoryService
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.http.ResponseEntity
@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.PutMapping
 import javax.validation.Valid
-import ru.testproject.catalog.to.CategoryTO
+import ru.petproject.catalog.to.CategoryTO
 import java.lang.Void
 import org.springframework.web.bind.annotation.DeleteMapping
-import ru.testproject.catalog.model.Category
+import ru.petproject.catalog.model.Category
 
 @RestController
 @RequestMapping("/categories")

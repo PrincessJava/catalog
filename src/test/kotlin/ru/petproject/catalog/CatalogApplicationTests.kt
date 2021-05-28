@@ -1,4 +1,4 @@
-package ru.testproject.catalog
+package ru.petproject.catalog
 
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.context.SpringBootTest

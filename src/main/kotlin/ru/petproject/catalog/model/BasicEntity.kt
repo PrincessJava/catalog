@@ -1,4 +1,4 @@
-package ru.testproject.catalog.model
+package ru.petproject.catalog.model
 
 import org.hibernate.annotations.CreationTimestamp
 import org.springframework.data.annotation.CreatedDate
@@ -13,21 +13,15 @@ import javax.persistence.*
 open class BasicEntity(
 
     @Version
-    private var version: Long = 1L
+    var version: Long = 1L,
 
-) : Serializable {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    open var id: Long? = null
-
-    @Column(updatable = false, nullable = false)
     @CreatedDate
     @CreationTimestamp
-    open var created = Date()
+    @Column(updatable = false, nullable = false)
+    var created: Date = Date(),
 
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    open var modified = Date()
+    var modified: Date = Date()
 
-}
+) : Serializable

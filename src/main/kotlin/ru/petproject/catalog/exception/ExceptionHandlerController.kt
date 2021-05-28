@@ -1,4 +1,4 @@
-package ru.testproject.catalog.exception
+package ru.petproject.catalog.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
