@@ -6,7 +6,6 @@ import ru.testproject.catalog.model.Category;
 
 import java.util.Optional;
 
-@Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     Optional<Category> getByName(String name);
 }

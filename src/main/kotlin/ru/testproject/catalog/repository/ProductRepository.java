@@ -6,7 +6,6 @@ import ru.testproject.catalog.model.Product;
 
 import java.util.Optional;
 
-@Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Optional<Product> getByName(String name);
 }
