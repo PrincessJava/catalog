@@ -7,34 +7,41 @@ import ru.petproject.catalog.exception.ConstraintViolationException
 import ru.petproject.catalog.repository.CategoryRepository
 import ru.petproject.catalog.exception.NoDataFoundException
 import ru.petproject.catalog.model.Category
+import ru.petproject.catalog.model.enum.Message
 
 @Service
 @Transactional
 class CategoryService(private val repository: CategoryRepository) {
+
     @Transactional(readOnly = true, propagation = Propagation.SUPPORTS)
     fun getCategoryByName(name: String): Category {
-        return repository.getByName(name)
-            .orElseThrow { NoDataFoundException(name) }
+        return repository.findByName(name) ?: throw NoDataFoundException(name)
     }
 
     fun addCategory(categoryName: String, parentCategoryName: String?): Category {
+        if (repository.findByName(categoryName) != null) {
+            throw ConstraintViolationException(
+                Message.getFormattedMessage(
+                    Message.CATEGORY_ALREADY_EXISTS,
+                    categoryName
+                )
+            )
+        }
+
         val newCategory = Category(categoryName)
 
         if (!parentCategoryName.isNullOrBlank()) {
-            val parentCategory = repository.getByName(parentCategoryName)
-                .orElseThrow { NoDataFoundException(parentCategoryName) }
+            val parentCategory = repository.findByName(categoryName) ?: throw NoDataFoundException(categoryName)
             newCategory.parent = parentCategory
         }
         return repository.save(newCategory)
     }
 
     fun move(categoryName: String, newCategoryName: String) {
-        val category = repository.getByName(categoryName)
-            .orElseThrow { NoDataFoundException(categoryName) }
+        val category = repository.findByName(categoryName) ?: throw NoDataFoundException(categoryName)
 
         val oldCategory = category.parent
-        val newCategory = repository.getByName(newCategoryName)
-            .orElseThrow { NoDataFoundException(newCategoryName) }
+        val newCategory = repository.findByName(categoryName) ?: throw NoDataFoundException(categoryName)
 
         category.parent = newCategory
         oldCategory?.children?.remove(category)
@@ -42,11 +49,12 @@ class CategoryService(private val repository: CategoryRepository) {
     }
 
     fun delete(categoryName: String) {
-        val category = repository.getByName(categoryName)
-            .orElseThrow { NoDataFoundException(categoryName) }
+        val category = repository.findByName(categoryName) ?: throw NoDataFoundException(categoryName)
 
         if (!category.products.isNullOrEmpty() || !category.children.isNullOrEmpty()) {
-            throw ConstraintViolationException(categoryName)
+            throw ConstraintViolationException(
+                Message.getFormattedMessage(Message.CATEGORY_HAS_CHILDREN, categoryName)
+            )
         }
         val parent = category.parent
         parent?.children?.remove(category)

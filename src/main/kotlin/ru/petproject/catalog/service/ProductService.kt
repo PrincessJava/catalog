@@ -29,8 +29,7 @@ class ProductService(
 
     fun move(productName: String, newCategoryName: String) {
         val newCategory = categoryService.getCategoryByName(newCategoryName)
-        val product = repository.getByName(productName)
-            .orElseThrow { NoDataFoundException(productName) }
+        val product = repository.findByName(productName) ?: throw NoDataFoundException(productName)
 
         val oldCategory = categoryService.getCategoryByName(product.category!!.name)
         product.category = newCategory
@@ -39,8 +38,7 @@ class ProductService(
     }
 
     fun delete(productName: String) {
-        val product = repository.getByName(productName)
-            .orElseThrow { NoDataFoundException(productName) }
+        val product = repository.findByName(productName) ?: throw NoDataFoundException(productName)
 
         product.category!!.products.remove(product)
         repository.delete(product)
