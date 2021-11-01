@@ -135,6 +135,9 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>ru.petproject.catalog.CatalogApplication</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
