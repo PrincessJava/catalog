@@ -51,7 +51,7 @@ class CategoryService(private val repository: CategoryRepository) {
     fun delete(categoryName: String) {
         val category = repository.findByName(categoryName) ?: throw NoDataFoundException(categoryName)
 
-        if (!category.products.isNullOrEmpty() || !category.children.isNullOrEmpty()) {
+        if (category.products.isNotEmpty() || category.children.isNotEmpty()) {
             throw ConstraintViolationException(
                 Message.getFormattedMessage(Message.CATEGORY_HAS_CHILDREN, categoryName)
             )

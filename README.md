@@ -1,5 +1,5 @@
 # test project catalog
-серверное приложение на spring boot "Каталог Товаров".
+серверное приложение на spring boot "Каталог Топ Шмота".
 
 Каталог состоит из разделов и продуктов.
 Раздел может содержать подразделы. Товар может находиться только в одном разделе.
@@ -8,27 +8,33 @@
 Для работы с данными использовать JPA
 При проектирование api учитывать что количество разделов и их глубина вложенности может быть не ограничена
 
-ручки:
-1. http://localhost:8080/categories/add/{categoryName}/?parentName={parentCategoryName} - добавление нового подраздела. 
+API:
+local: http://localhost:8080/
+remote: https://catalog-clothes.herokuapp.com/
+
+Категории:
+1. POST categories/{categoryName}/?parentName={parentCategoryName} - добавление нового подраздела. 
 Если раздел корневой, parentCategoryName - пустой
-2. http://localhost:8080/categories/move - перемещение подраздела из одного в другой
+2. PUT: categories/move - перемещение подраздела из одного в другой
 body: {
-	"name" : "{categoryName}",
-	"newCatName": "{newParentCategoryName}"
+    "name" : "{categoryName}",
+    "newCatName": "{newParentCategoryName}"
 }
-3. http://localhost:8080/categories/get/{categoryName} - возвращает информацию о разделе
-4. http://localhost:8080/products/add - добавление нового продукта в раздел
+3. GET: categories/{categoryName} - возвращает информацию о разделе
+4. DELETE: /categories/{categoryName} - удаляет раздел (только если он не содержит продукты и подразделы)
+
+Продукты:
+1. POST: products/add - добавление нового продукта в раздел
 body:
 {
-	"name" : "{productName}",
-	"category" : "{categoryName}"
+    "name" : "{productName}",
+    "category" : "{categoryName}"
 }
-5. http://localhost:8080/products/{categoryName} - возвращает список продуктов в разделе
-6. http://localhost:8080/products/move - перемещает продукт из одного раздела в другой 
+2. GET: products/{categoryName} - возвращает список продуктов в разделе
+3. PUT: products/move - перемещает продукт из одного раздела в другой 
 body:
 {
-	"name" : "{productName}",
-	"category" : "{categoryName}"
+    "name" : "{productName}",
+    "category" : "{categoryName}"
 }
-7. http://localhost:8080/products/remove/{productName} - удаляет продукт
-8. http://localhost:8080/categories/remove/{categoryName} - удаляет раздел (вернет ошибку, если есть подразделы или товары)
+4. DELETE: products/{productName} - удаляет продукт
