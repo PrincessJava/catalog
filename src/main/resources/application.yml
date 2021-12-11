@@ -7,6 +7,12 @@ spring:
     open-in-view: false
   liquibase:
     enabled: false
+  datasource:
+    hikari:
+      jdbc-url: jdbc:postgres://fjufyfihpjeckt:79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/dcecjp4t3bsbvf
+      username: fjufyfihpjeckt
+      password: 79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c
+
 ---
 
 spring:
