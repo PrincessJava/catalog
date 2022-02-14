@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+  <appender name="json" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+      <includeMdcKeyName>Request-ID</includeMdcKeyName>
+      <includeContext>true</includeContext>
+      <timeZone>UTC</timeZone>
+      <timestampPattern>HH:mm:ss.SSS</timestampPattern>
+      <fieldNames>
+        <timestamp>time</timestamp>
+        <version>[ignore]</version>
+        <levelValue>[ignore]</levelValue>
+        <stackTrace>exception</stackTrace>
+      </fieldNames>
+    </encoder>
+  </appender>
+
+  <root level="info">
+    <appender-ref ref="json"/>
+  </root>
+
+</configuration>
