@@ -1,10 +1,10 @@
 package ru.petproject.catalog.model
 
 import com.fasterxml.jackson.annotation.JsonBackReference
-import com.sun.istack.NotNull
+import jakarta.persistence.*
+import jakarta.validation.constraints.NotNull
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Parameter
-import javax.persistence.*
 
 @Entity
 @Table(name = "product")

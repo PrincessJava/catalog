@@ -1,6 +1,7 @@
 package ru.petproject.catalog.controller
 
-import com.sun.istack.Nullable
+import jakarta.annotation.Nullable
+import jakarta.validation.Valid
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.petproject.catalog.service.CategoryService
@@ -10,7 +11,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.PutMapping
-import javax.validation.Valid
 import ru.petproject.catalog.to.CategoryTO
 import java.lang.Void
 import org.springframework.web.bind.annotation.DeleteMapping

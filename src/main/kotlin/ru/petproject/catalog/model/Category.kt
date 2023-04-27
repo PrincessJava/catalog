@@ -1,8 +1,8 @@
 package ru.petproject.catalog.model
 
+import jakarta.persistence.*
 import org.hibernate.annotations.GenericGenerator
 import org.hibernate.annotations.Parameter
-import javax.persistence.*
 
 @Entity
 @Table(name = "category")

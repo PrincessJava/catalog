@@ -1,6 +1,7 @@
 package ru.petproject.catalog.controller
 
-import com.sun.istack.NotNull
+import jakarta.validation.Valid
+import jakarta.validation.constraints.NotNull
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.petproject.catalog.service.ProductService
@@ -9,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.http.ResponseEntity
 import ru.petproject.catalog.model.Product
 import org.springframework.web.bind.annotation.PostMapping
-import javax.validation.Valid
 import ru.petproject.catalog.to.ProductTO
 import org.springframework.web.bind.annotation.PutMapping
 import java.lang.Void

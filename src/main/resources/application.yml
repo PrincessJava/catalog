@@ -1,57 +1,70 @@
 spring:
-  profiles:
-    active: dev
+#  config:
+#    activate:
+#      on-profile: dev
   jpa:
     hibernate:
       ddl-auto: validate
     open-in-view: false
-  liquibase:
-    enabled: false
-logging:
-  level:
-    root: info
-
----
-
-spring:
-  profiles: test
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  datasource:
-    url: jdbc:h2:~/test;DB_CLOSE_ON_EXIT=TRUE;create=true
-
----
-
-spring:
-  profiles: dev
-  jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
     url: jdbc:postgresql://localhost:5432/catalog
     username: postgres
     password: postgres
+  liquibase:
+    enabled: true
+logging:
+  level:
+    root: info
 
----
 
-spring:
-  profiles: prod
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-  datasource:
-    maxActive: 10
-    maxIdle: 5
-    minIdle: 2
-    initialSize: 5
-    removeAbandoned: true
-    url: jdbc:postgresql:://fjufyfihpjeckt:79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/dcecjp4t3bsbvf?user=fjufyfihpjeckt&password=79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c
-    driver-class-name: org.postgresql.Driver
-    hikari:
-      jdbc-url: jdbc:postgresql:://fjufyfihpjeckt:79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/dcecjp4t3bsbvf
-      username: fjufyfihpjeckt
-      password: 79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c
+#---
+#
+#spring:
+#  config:
+#    activate:
+#      on-profile: test
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#  h2:
+#    console:
+#      enabled: true
+#      path: /h2-console
+#  datasource:
+#    url: jdbc:h2:~/test;DB_CLOSE_ON_EXIT=TRUE;create=true
+#
+#---
+#
+#spring:
+#  config:
+#    activate:
+#      on-profile: dev
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/catalog
+#    username: postgres
+#    password: postgres
+#
+#---
+#
+#spring:
+#  config:
+#    activate:
+#      on-profile: prod
+#  jpa:
+#    database-platform: org.hibernate.dialect.PostgreSQLDialect
+#  datasource:
+#    maxActive: 10
+#    maxIdle: 5
+#    minIdle: 2
+#    initialSize: 5
+#    removeAbandoned: true
+#    url: jdbc:postgresql:://fjufyfihpjeckt:79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/dcecjp4t3bsbvf?user=fjufyfihpjeckt&password=79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c
+#    driver-class-name: org.postgresql.Driver
+#    hikari:
+#      jdbc-url: jdbc:postgresql:://fjufyfihpjeckt:79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c@ec2-54-217-15-9.eu-west-1.compute.amazonaws.com:5432/dcecjp4t3bsbvf
+#      username: fjufyfihpjeckt
+#      password: 79636413d7d8ac1339a764d44253e8f673b65cb0abb7ec156be185dd4ef3b62c
 
